@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function VerifyPage() {
   const params = useParams();
@@ -19,7 +20,7 @@ export default function VerifyPage() {
           return;
         }
 
-        const response = await fetch(`http://localhost:3001/returnqr/${token}`);
+        const response = await fetch(`${API_URL}/returnqr/${token}`);
 
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);

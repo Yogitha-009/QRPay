@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import QRCode from "qrcode"
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [amount,setAmount]=useState(0);
@@ -11,7 +12,7 @@ export default function Home() {
   const [verify,setVerify]=useState("")
 
 function handleOnClick() {
-  fetch("http://localhost:3001/getdata", { 
+  fetch(`${API_URL}/getdata`, { 
     method: "POST",
     headers: {
       'Content-Type': 'application/json' 
@@ -28,7 +29,7 @@ function handleOnClick() {
     return token
   })
   .then( async function(token ){
-    const url = `https://localhost:3000/verify`;
+    const url = `${API_URL}/verify`;
     const qrImage = await QRCode.toDataURL(url);
     setQr(qrImage);
   })
